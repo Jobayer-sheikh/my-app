@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+# First check if we need to run any commands
+if [ "$1" = '/usr/bin/supervisord' ]; then
+    # Run Laravel optimizations
+    php artisan config:cache
+    php artisan view:cache
+fi
+
+exec "$@"
