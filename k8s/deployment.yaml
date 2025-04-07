@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laravel
+  template:
+    metadata:
+      labels:
+        app: laravel
+    spec:
+      containers:
+      - name: laravel
+        image: your-dockerhub-username/laravel-app:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: storage
+          mountPath: /var/www/html/storage
+      volumes:
+      - name: storage
+        emptyDir: {}
